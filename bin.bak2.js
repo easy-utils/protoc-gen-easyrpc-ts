@@ -6,8 +6,6 @@ import { resolveMethods } from './gen/resolve.js'
 const chunks = []
 for await (const c of process.stdin) chunks.push(c)
 const req = fromBinary(CodeGeneratorRequestSchema, new Uint8Array(Buffer.concat(chunks)))
-import { writeFileSync } from 'node:fs'
-writeFileSync('/tmp/opencode/reqout.json', JSON.stringify(req, (k,v)=> typeof v==='bigint'?v.toString():v, 2))
 
 const responseFiles = []
 for (const f of req.protoFile) {
